@@ -4,26 +4,181 @@
     <title>Travel Buddy Finder</title>
 </head>
 <body>
-
-<h2>Travel Buddy Finder</h2>
-
-<form action="/travellers" method="POST">
-
-    Traveller ID:
-    <input type="text" name="travellerId"><br><br>
-
-    Name:
-    <input type="text" name="name"><br><br>
-
-    Destination:
-    <input type="text" name="destination"><br><br>
-
-    Travel Date:
-    <input type="date" name="travelDate"><br><br>
-
-    <button type="submit">Add Traveller</button>
-
-</form>
-
+ 
+    <h2>Travel Buddy Finder</h2>
+ 
+    <!-- Add Travel Buddy -->
+    <h3>1. Add Travel Buddy</h3>
+ 
+    <form action="/travellers" method="POST">
+ 
+        <label>Buddy ID:</label>
+        <input type="text" name="buddyId">
+        <br><br>
+ 
+        <label>Name:</label>
+        <input type="text" name="name">
+        <br><br>
+ 
+        <label>Destination:</label>
+        <input type="text" name="destination">
+        <br><br>
+ 
+        <label>Age:</label>
+        <input type="number" name="age">
+        <br><br>
+ 
+        <label>Budget:</label>
+        <input type="number" name="budget">
+        <br><br>
+ 
+        <label>Trip Duration:</label>
+        <input type="number" name="tripDuration">
+        <br><br>
+ 
+        <label>Interests:</label>
+        <input type="text" name="interests">
+        <br><br>
+ 
+        <label>Status:</label>
+        <input type="text" name="status">
+        <br><br>
+ 
+        <button type="submit">Add Travel Buddy</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Search by Destination and Budget -->
+    <h3>2. Search by Destination and Budget</h3>
+ 
+    <form action="/travellers/search" method="GET">
+ 
+        <label>Destination:</label>
+        <input type="text" name="destination">
+ 
+        <label>Minimum Budget:</label>
+        <input type="number" name="budget">
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Search by Buddy ID -->
+    <h3>3. Search by Buddy ID</h3>
+ 
+    <form action="/travellers/searchById" method="GET">
+ 
+        <label>Buddy ID:</label>
+        <input type="text" name="buddyId">
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Display Selected Fields -->
+    <h3>4. Display Selected Fields</h3>
+ 
+    <form action="/travellers/details" method="GET">
+ 
+        <label>Buddy ID:</label>
+        <input type="text" name="buddyId">
+ 
+        <button type="submit">Display Details</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Update -->
+    <h3>5. Update Destination and Budget</h3>
+ 
+    <form action="/travellers/update" method="POST">
+ 
+        <label>Buddy ID:</label>
+        <input type="text" name="buddyId">
+        <br><br>
+ 
+        <label>New Destination:</label>
+        <input type="text" name="destination">
+        <br><br>
+ 
+        <label>New Budget:</label>
+        <input type="number" name="budget">
+        <br><br>
+ 
+        <button type="submit">Update</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Increase Budget -->
+    <h3>6. Increase Budget for Destination</h3>
+ 
+    <form action="/travellers/increaseBudget" method="POST">
+ 
+        <label>Destination:</label>
+        <input type="text" name="destination">
+        <br><br>
+ 
+        <label>Amount to Increase:</label>
+        <input type="number" name="amount">
+        <br><br>
+ 
+        <button type="submit">Increase Budget</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Budget Range -->
+    <h3>7. Search Budget Range</h3>
+ 
+    <form action="/travellers/range" method="GET">
+ 
+        <label>Minimum Budget:</label>
+        <input type="number" name="min">
+        <br><br>
+ 
+        <label>Maximum Budget:</label>
+        <input type="number" name="max">
+        <br><br>
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Delete -->
+    <h3>8. Delete Travel Buddy</h3>
+ 
+    <form action="/travellers/delete" method="POST">
+ 
+        <label>Buddy ID:</label>
+        <input type="text" name="buddyId">
+ 
+        <button type="submit">Delete</button>
+ 
+    </form>
+ 
+    <hr>
+ 
+    <!-- Final Display -->
+    <h3>9. Display All Buddies</h3>
+ 
+    <form action="/travellers/final" method="GET">
+ 
+        <button type="submit">Display All</button>
+ 
+    </form>
+ 
 </body>
 </html>
+ 

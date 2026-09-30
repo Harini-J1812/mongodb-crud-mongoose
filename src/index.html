@@ -1,29 +1,216 @@
 <!DOCTYPE html>
 <html>
+ 
 <head>
     <title>Campus Club Members</title>
 </head>
+ 
 <body>
-
-<h2>Campus Club Member</h2>
-
-<form action="/members" method="POST">
-
-    Member ID:
-    <input type="text" name="memberId"><br><br>
-
-    Name:
-    <input type="text" name="name"><br><br>
-
-    Department:
-    <input type="text" name="department"><br><br>
-
-    Club:
-    <input type="text" name="club"><br><br>
-
-    <button type="submit">Add Member</button>
-
-</form>
-
+ 
+    <h2>Campus Club Member Management</h2>
+ 
+    <h3>Add Club Member</h3>
+ 
+    <form action="/members" method="POST">
+ 
+        <label>Member ID:</label>
+        <input type="text" name="memberId">
+ 
+        <br><br>
+ 
+        <label>Name:</label>
+        <input type="text" name="name">
+ 
+        <br><br>
+ 
+        <label>Club Name:</label>
+        <input type="text" name="club">
+ 
+        <br><br>
+ 
+        <label>Year of Study:</label>
+        <input type="number" name="yearOfStudy">
+ 
+        <br><br>
+ 
+        <label>Role:</label>
+        <input type="text" name="role">
+ 
+        <br><br>
+ 
+        <label>Points:</label>
+        <input type="number" name="points">
+ 
+        <br><br>
+ 
+        <label>Interests:</label>
+        <input type="text" name="interests">
+ 
+        <br><br>
+ 
+        <label>Status:</label>
+        <input type="text" name="status">
+ 
+        <br><br>
+ 
+        <button type="submit">Add Member</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+ 
+    <!-- Search club members -->
+    <h3>Search Members by Club and Points</h3>
+ 
+    <form action="/members/search" method="GET">
+ 
+        <label>Club Name:</label>
+        <input type="text" name="club">
+ 
+        <br><br>
+ 
+        <label>Points Greater Than:</label>
+        <input type="number" name="points">
+ 
+        <br><br>
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+ 
+    <h3>Search Member by ID</h3>
+ 
+    <form action="/members/searchById" method="GET">
+ 
+        <label>Member ID:</label>
+        <input type="text" name="memberId">
+ 
+        <br><br>
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Display Selected Member Details</h3>
+ 
+    <form action="/members/details" method="GET">
+ 
+        <label>Member ID:</label>
+        <input type="text" name="memberId">
+ 
+        <br><br>
+ 
+        <button type="submit">Display Details</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Update Role and Points</h3>
+ 
+    <form action="/members/update" method="POST">
+ 
+        <label>Member ID:</label>
+        <input type="text" name="memberId">
+ 
+        <br><br>
+ 
+        <label>New Role:</label>
+        <input type="text" name="role">
+ 
+        <br><br>
+ 
+        <label>New Points:</label>
+        <input type="number" name="points">
+ 
+        <br><br>
+ 
+        <button type="submit">Update Member</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Increase Points of Club Members</h3>
+ 
+    <form action="/members/increasePoints" method="POST">
+ 
+        <label>Club Name:</label>
+        <input type="text" name="club">
+ 
+        <br><br>
+ 
+        <label>Increase Points By:</label>
+        <input type="number" name="amount">
+ 
+        <br><br>
+ 
+        <button type="submit">Increase Points</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Search Members by Points Range</h3>
+ 
+    <form action="/members/range" method="GET">
+ 
+        <label>Minimum Points:</label>
+        <input type="number" name="min">
+ 
+        <br><br>
+ 
+        <label>Maximum Points:</label>
+        <input type="number" name="max">
+ 
+        <br><br>
+ 
+        <button type="submit">Search</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Delete Member</h3>
+ 
+    <form action="/members/delete" method="POST">
+ 
+        <label>Member ID:</label>
+        <input type="text" name="memberId">
+ 
+        <br><br>
+ 
+        <button type="submit">Delete Member</button>
+ 
+    </form>
+ 
+ 
+    <hr>
+ 
+    <h3>Display All Members</h3>
+ 
+    <form action="/members/final" method="GET">
+ 
+        <button type="submit">
+            Display All Members in Descending Order of Points
+        </button>
+ 
+    </form>
+ 
 </body>
+ 
 </html>
+ 

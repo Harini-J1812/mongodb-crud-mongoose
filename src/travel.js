@@ -1,14 +1,14 @@
+require("dotenv").config();
+ 
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-
+ 
 const app = express();
-
-// To read data submitted from HTML form
+ 
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-mongoose.connect("mongodb://user_453vzxdxq:p453vzxdxq@db01.dbhost.dev:5050/db_453vzxdxq")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB connected");
     })
@@ -16,39 +16,180 @@ mongoose.connect("mongodb://user_453vzxdxq:p453vzxdxq@db01.dbhost.dev:5050/db_45
         console.log(error);
     });
 
-// Mongoose Schema
 const travelSchema = new mongoose.Schema({
-    travellerId: String,
+ 
+    buddyId: String,
     name: String,
     destination: String,
-    travelDate: String
+    age: Number,
+    budget: Number,
+    tripDuration: Number,
+    interests: String,
+    status: String
+ 
 });
 
-// Mongoose Model
 const Traveller = mongoose.model("Traveller", travelSchema);
-
-// Display the HTML page
+ 
 app.get("/", (req, res) => {
+ 
     res.sendFile(path.join(__dirname, "index2.html"));
+ 
 });
 
-// Insert traveller
 app.post("/travellers", async (req, res) => {
+ 
     console.log(req.body);
-
+ 
     const traveller = new Traveller({
-        travellerId: req.body.travellerId,
+ 
+        buddyId: req.body.buddyId,
         name: req.body.name,
         destination: req.body.destination,
-        travelDate: req.body.travelDate
+        age: Number(req.body.age),
+        budget: Number(req.body.budget),
+        tripDuration: Number(req.body.tripDuration),
+        interests: req.body.interests,
+        status: req.body.status
+ 
     });
-
+ 
     await traveller.save();
-
+ 
     res.send("Travel buddy added successfully");
+ 
+});
+ 
+app.get("/travellers/search", async (req, res) => {
+ 
+    const destination = req.query.destination;
+    const budget = Number(req.query.budget);
+ 
+    const travellers = await Traveller.find({
+ 
+        destination: destination,
+        budget: { $gt: budget }
+ 
+    });
+ 
+    res.json(travellers);
+ 
 });
 
-// Start server
+app.get("/travellers/searchById", async (req, res) => {
+ 
+    const traveller = await Traveller.findOne({
+ 
+        buddyId: req.query.buddyId
+ 
+    });
+ 
+    res.json(traveller);
+ 
+});
+ 
+ 
+app.get("/travellers/details", async (req, res) => {
+ 
+    const traveller = await Traveller.findOne(
+ 
+        { buddyId: req.query.buddyId },
+ 
+        {
+            _id: 0,
+            name: 1,
+            destination: 1,
+            budget: 1,
+            tripDuration: 1
+        }
+ 
+    );
+ 
+    res.json(traveller);
+ 
+});
+ 
+
+app.post("/travellers/update", async (req, res) => {
+ 
+    const traveller = await Traveller.findOneAndUpdate(
+ 
+        { buddyId: req.body.buddyId },
+ 
+        {
+            destination: req.body.destination,
+            budget: Number(req.body.budget)
+        },
+ 
+        { returnDocument: "after" }
+ 
+    );
+ 
+    res.json(traveller);
+ 
+});
+
+app.post("/travellers/increaseBudget", async (req, res) => {
+ 
+    const result = await Traveller.updateMany(
+ 
+        { destination: req.body.destination },
+ 
+        {
+            $inc: {
+                budget: Number(req.body.amount)
+            }
+        }
+ 
+    );
+ 
+    res.json(result);
+ 
+});
+ 
+
+app.get("/travellers/range", async (req, res) => {
+ 
+    const min = Number(req.query.min);
+    const max = Number(req.query.max);
+ 
+    const travellers = await Traveller.find({
+ 
+        budget: {
+            $gte: min,
+            $lte: max
+        }
+ 
+    });
+ 
+    res.json(travellers);
+ 
+});
+ 
+app.post("/travellers/delete", async (req, res) => {
+ 
+    const traveller = await Traveller.findOneAndDelete({
+ 
+        buddyId: req.body.buddyId
+ 
+    });
+ 
+    res.json(traveller);
+ 
+});
+ 
+ 
+app.get("/travellers/final", async (req, res) => {
+ 
+    const travellers = await Traveller.find()
+        .sort({ budget: -1 });
+ 
+    res.json(travellers);
+ 
+});
+
 app.listen(3000, () => {
+ 
     console.log("Server running on port 3000");
+ 
 });
